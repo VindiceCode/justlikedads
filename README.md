@@ -39,11 +39,34 @@ npm install
 npm run dev
 ```
 
-## Environment Variables
+## Environment Setup
 
+### Quick Start
+
+```bash
+cp .env.example .env.local
+# Edit .env.local with your credentials
 ```
-TURSO_DATABASE_URL=
-TURSO_AUTH_TOKEN=
-BONZO_API_KEY=
-BONZO_PIPELINE_STAGE_ID=
-```
+
+### Required Variables
+
+| Variable | Description |
+|----------|-------------|
+| `TURSO_DATABASE_URL` | Turso database connection string (libsql://...) |
+| `TURSO_AUTH_TOKEN` | Authentication token for Turso |
+| `BONZO_API_KEY` | API key for Bonzo CRM integration |
+| `BONZO_PIPELINE_STAGE_ID` | Pipeline stage ID for new leads |
+
+### Getting Credentials
+
+**Turso Database**
+1. Sign up at [turso.tech](https://turso.tech)
+2. Create a new database (or use existing)
+3. Go to database settings → "Connect" tab
+4. Copy the database URL and generate an auth token
+
+**Bonzo CRM**
+1. Log into Bonzo dashboard
+2. Go to Settings → API
+3. Generate or copy your API key
+4. For pipeline stage ID: go to Pipelines → select your pipeline → the stage ID is in the URL when viewing a stage
