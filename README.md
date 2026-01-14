@@ -70,3 +70,27 @@ cp .env.example .env.local
 2. Go to Settings → API
 3. Generate or copy your API key
 4. For pipeline stage ID: go to Pipelines → select your pipeline → the stage ID is in the URL when viewing a stage
+
+## Deployment
+
+### Vercel Deployment
+
+This project is configured for deployment on [Vercel](https://vercel.com).
+
+**Deployment Steps:**
+
+1. Connect your GitHub repository to Vercel
+2. Vercel will auto-detect Next.js and apply optimal build settings
+3. Configure environment variables in the Vercel dashboard
+4. Deploy
+
+**Vercel Project:** [TBD - Add link after deployment]
+
+### Build Verification
+
+Before deploying, verify the build locally:
+
+```bash
+npm run build
+npm run lint
+```
