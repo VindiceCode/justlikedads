@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Like Dad's Barbecue | Bold Texas Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #222;
+            line-height: 1.7;
+            background: #fff;
+        }
+
+        /* Hero with Full Video Background */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Video Background */
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .hero-video-bg video,
+        .hero-video-bg iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* For YouTube/Vimeo, we need special handling to cover */
+        .hero-video-bg iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw; /* 16:9 aspect ratio */
+            min-height: 100vh;
+            min-width: 177.78vh; /* 16:9 */
+            transform: translate(-50%, -50%);
+        }
+
+        /* Dark overlay */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(139, 0, 0, 0.75) 0%,
+                rgba(80, 0, 0, 0.85) 100%
+            );
+            z-index: -1;
+        }
+
+        /* Placeholder background (remove when video added) */
+        .hero-placeholder-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(139, 0, 0, 0.8), rgba(60, 0, 0, 0.9)),
+                url('https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=1600') center/cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .brand-tag {
+            display: inline-block;
+            border: 2px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1.5rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: 0.5em;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            opacity: 0.9;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #8b0000;
+            padding: 1.1rem 3rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: #ffd700;
+            transform: scale(1.05);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .scroll-hint::after {
+            content: '↓';
+            display: block;
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* Video Instructions Box */
+        .video-instructions {
+            position: absolute;
+            bottom: 5rem;
+            right: 2rem;
+            background: rgba(0,0,0,0.6);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            max-width: 250px;
+            text-align: left;
+            border: 1px dashed rgba(255,255,255,0.3);
+        }
+
+        .video-instructions strong {
+            color: #ffd700;
+        }
+
+        /* Services */
+        .services {
+            padding: 5rem 2rem;
+            background: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #8b0000;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #fff;
+            border-bottom: 4px solid #8b0000;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #222;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: #666;
+        }
+
+        /* Booking */
+        .booking {
+            padding: 5rem 2rem;
+            background: #8b0000;
+            color: white;
+        }
+
+        .booking .section-title {
+            color: #fff;
+        }
+
+        .booking .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #222;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e5e5;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b0000;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .submit-button {
+            width: 100%;
+            background: #8b0000;
+            color: #fff;
+            padding: 1.1rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #a00;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #888;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-brand {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b0000;
+            margin-bottom: 0.25rem;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <!-- 
+        =====================================================
+        VIDEO BACKGROUND OPTIONS
+        Uncomment ONE of these options and remove the placeholder div
+        =====================================================
+        -->
+
+        <!-- OPTION 1: Self-hosted MP4 video -->
+        <!--
+        <div class="hero-video-bg">
+            <video autoplay muted loop playsinline>
+                <source src="your-video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+        -->
+
+        <!-- OPTION 2: YouTube video background -->
+        <!--
+        <div class="hero-video-bg">
+            <iframe 
+                src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=YOUR_VIDEO_ID&controls=0&showinfo=0&modestbranding=1"
+                allow="autoplay; encrypted-media"
+                frameborder="0">
+            </iframe>
+        </div>
+        <div class="hero-overlay"></div>
+        -->
+
+        <!-- OPTION 3: Vimeo video background -->
+        <!--
+        <div class="hero-video-bg">
+            <iframe 
+                src="https://player.vimeo.com/video/YOUR_VIDEO_ID?autoplay=1&muted=1&loop=1&background=1"
+                allow="autoplay; fullscreen"
+                frameborder="0">
+            </iframe>
+        </div>
+        <div class="hero-overlay"></div>
+        -->
+
+        <!-- PLACEHOLDER - Remove this entire div when you add a real video -->
+        <div class="hero-placeholder-bg"></div>
+
+        <div class="hero-content">
+            <div class="brand-tag">Authentic Smoked BBQ</div>
+            <h1>
+                Just Like Dad's
+                <span>Barbecue Catering</span>
+            </h1>
+            <p class="tagline">Low and slow. The way it's meant to be. Catering for events that matter.</p>
+            <a href="#booking" class="cta-button">Book Your Event</a>
+        </div>
+
+        <div class="scroll-hint">Scroll to explore</div>
+
+        <!-- Remove this instruction box when going live -->
+        <div class="video-instructions">
+            <strong>📹 Add your video:</strong><br>
+            Record yourself at the smoker, show the process, or share your story. See code comments for embed instructions.
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">We Bring the Smoke</h2>
+                <p class="section-subtitle">Full-service catering for any size event</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🍖</div>
+                    <h3>Backyard Parties</h3>
+                    <p>Birthday bashes, family reunions, neighborhood cookouts—we've got you covered with real pit-smoked barbecue.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Corporate Events</h3>
+                    <p>Impress clients, reward your team, or celebrate company milestones with food they won't forget.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💍</div>
+                    <h3>Weddings & More</h3>
+                    <p>Rehearsal dinners, receptions, and celebrations. Let us handle the food so you can enjoy the moment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking" id="booking">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get a Free Quote</h2>
+                <p class="section-subtitle">Tell us about your event and we'll be in touch within 24 hours</p>
+            </div>
+            
+            <form class="booking-form" action="#" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventDate">Event Date</label>
+                        <input type="date" id="eventDate" name="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestCount">Guest Count</label>
+                        <input type="number" id="guestCount" name="guestCount" min="15" placeholder="e.g. 50" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventType">Event Type</label>
+                    <select id="eventType" name="eventType" required>
+                        <option value="">Select one...</option>
+                        <option value="private">Private Party</option>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="wedding">Wedding / Rehearsal</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="details">Tell Us More</label>
+                    <textarea id="details" name="details" placeholder="Location, menu preferences, dietary needs, questions..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button">Request Quote</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-brand">Just Like Dad's Barbecue</p>
+        <p>&copy; 2025 • Slow Smoked. Family Made.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Like Dad's BBQ | Launch Plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+            line-height: 1.5;
+            padding: 2rem;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #8b0000;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #8b0000;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .header-meta {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .summary {
+            background: #f8f8f8;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #8b0000;
+        }
+
+        .summary h2 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b0000;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary p {
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .phases {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .phases {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .phase {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .phase-number {
+            position: absolute;
+            top: -10px;
+            left: 1rem;
+            background: #8b0000;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .phase h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            margin-top: 0.25rem;
+            color: #1a1a1a;
+        }
+
+        .phase ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .phase ul li {
+            padding: 0.25rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .phase ul li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: #8b0000;
+        }
+
+        .phase.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .deliverables {
+            background: #1a1a1a;
+            color: white;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .deliverables h2 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #ffd700;
+            margin-bottom: 0.75rem;
+        }
+
+        .deliverable-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .deliverable-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .deliverable-item {
+            text-align: center;
+        }
+
+        .deliverable-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .deliverable-item h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .deliverable-item p {
+            font-size: 0.75rem;
+            color: #aaa;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .box {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .box h2 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b0000;
+            margin-bottom: 0.5rem;
+        }
+
+        .box p, .box li {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .box ul {
+            list-style: none;
+        }
+
+        .box ul li {
+            padding: 0.2rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .box ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #8b0000;
+        }
+
+        .upsell-box {
+            background: linear-gradient(135deg, #8b0000 0%, #5c0000 100%);
+            color: white;
+        }
+
+        .upsell-box h2 {
+            color: #ffd700;
+        }
+
+        .upsell-box p, .upsell-box li {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .upsell-box ul li::before {
+            color: #ffd700;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #999;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .timeline-item::after {
+            content: '→';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-item span {
+            display: block;
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .timeline-item strong {
+            font-size: 0.85rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div>
+            <h1>🔥 Just Like Dad's BBQ</h1>
+            <p>Lead Generation Landing Page — Launch Plan</p>
+        </div>
+        <div class="header-meta">
+            <strong>Project Plan</strong><br>
+            January 2025
+        </div>
+    </header>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <span>Phase 1</span>
+            <strong>Finalize</strong>
+        </div>
+        <div class="timeline-item">
+            <span>Phase 2</span>
+            <strong>Deploy</strong>
+        </div>
+        <div class="timeline-item">
+            <span>Phase 3</span>
+            <strong>Print</strong>
+        </div>
+        <div class="timeline-item">
+            <span>Phase 4</span>
+            <strong>Launch</strong>
+        </div>
+        <div class="timeline-item">
+            <span>Phase 5</span>
+            <strong>Expand</strong>
+        </div>
+    </div>
+
+    <div class="summary">
+        <h2>The Goal</h2>
+        <p><strong>Turn conversations into customers.</strong> When Dad meets someone interested in catering—at Just Stop, in the community, anywhere—he hands them a business card. They scan the QR code, land on a professional page, fill out their info, and become a lead he can follow up with.</p>
+    </div>
+
+    <div class="phases">
+        <div class="phase">
+            <span class="phase-number">Phase 1</span>
+            <h3>Finalize Landing Page</h3>
+            <ul>
+                <li>Pick final design style</li>
+                <li>Add Dad's real photos/video</li>
+                <li>Update menu items & pricing</li>
+                <li>Set up form destination (email or sheet)</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <span class="phase-number">Phase 2</span>
+            <h3>Deploy to Vercel</h3>
+            <ul>
+                <li>Create free Vercel account</li>
+                <li>Upload landing page files</li>
+                <li>Connect custom domain (optional)</li>
+                <li>Test on mobile & desktop</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <span class="phase-number">Phase 3</span>
+            <h3>Create Business Cards</h3>
+            <ul>
+                <li>Design card with branding</li>
+                <li>Generate QR code → landing page URL</li>
+                <li>Add QR code to card design</li>
+                <li>Order print run (Vistaprint, MOO, etc.)</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <span class="phase-number">Phase 4</span>
+            <h3>Launch & Train</h3>
+            <ul>
+                <li>Give Dad his cards + one-pager</li>
+                <li>Show how leads come in</li>
+                <li>Set up simple follow-up process</li>
+                <li>Start handing out cards!</li>
+            </ul>
+        </div>
+
+        <div class="phase full-width">
+            <span class="phase-number">Phase 5</span>
+            <h3>Expand: Pitch to Just Stop Carryout</h3>
+            <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem;">
+                <li>Document Dad's results (leads, bookings)</li>
+                <li>Prepare pitch deck / demo for owner</li>
+                <li>Propose custom version for Just Stop</li>
+                <li>Price at premium ($500-1500+ for full setup)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="deliverables">
+        <h2>What Dad Gets</h2>
+        <div class="deliverable-grid">
+            <div class="deliverable-item">
+                <div class="icon">🌐</div>
+                <h4>Live Landing Page</h4>
+                <p>Professional site at a real URL</p>
+            </div>
+            <div class="deliverable-item">
+                <div class="icon">📇</div>
+                <h4>Business Cards</h4>
+                <p>With QR code to the page</p>
+            </div>
+            <div class="deliverable-item">
+                <div class="icon">📥</div>
+                <h4>Lead Capture</h4>
+                <p>Form sends inquiries to email</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="two-column">
+        <div class="box">
+            <h2>How It Works (Dad's One-Pager)</h2>
+            <ul>
+                <li><strong>Meet someone</strong> interested in catering</li>
+                <li><strong>Hand them a card</strong> — "Scan this for my menu"</li>
+                <li><strong>They fill out the form</strong> on your page</li>
+                <li><strong>You get an email</strong> with their info</li>
+                <li><strong>Follow up</strong> to close the deal</li>
+            </ul>
+        </div>
+
+        <div class="box upsell-box">
+            <h2>Pitch to Just Stop Owner</h2>
+            <ul>
+                <li>"I built this for my side business..."</li>
+                <li>"Look how many leads I'm getting"</li>
+                <li>"Customers scan, order, done"</li>
+                <li>"My son can build one for the restaurant"</li>
+                <li><strong>Value: $500-1500+</strong> for full setup</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer">
+        Just Like Dad's Barbecue • Landing Page Project Plan • Made with Claude
+    </footer>
+
+</body>
+</html>
