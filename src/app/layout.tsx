@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Just Like Dad's BBQ",
-  description: "Premium BBQ catering for your events",
+  title: "Just Like Dad's Barbecue | Authentic Smoked BBQ Catering",
+  description: "Low and slow. The way it's meant to be. Professional BBQ catering for weddings, corporate events, and private parties.",
 };
 
 export default function RootLayout({
